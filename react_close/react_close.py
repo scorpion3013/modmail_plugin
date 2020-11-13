@@ -10,8 +10,8 @@ class ReactionClose(commands.Cog):
         msg = thread.genesis_message
         print(msg)
         print(thread)
-        print(thread.channel)
-        self.channels[thread.channel] = thread
+        print(thread.channel.id)
+        self.channels[thread.channel.id] = thread
         await msg.add_reaction("🔒")
 
     @commands.Cog.listener()
