@@ -15,9 +15,16 @@ class ReactionClose(commands.Cog):
 
     @commands.Cog.listener()
     async def on_thread_close(self, thread, closer, silent, delete_channel, message, scheduled):
-        print("close event Does not get triggert for some reason")
+        # Didnt worked and too lazy to figure out
         print(closer)
         print(message)
+
+    @commands.Cog.listener()
+    async def on_guild_channel_delete(self, channel):
+        try:
+            self.channels.pop(channel.id)
+        except:
+            pass
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
@@ -37,8 +44,6 @@ class ReactionClose(commands.Cog):
         if emote == "🔒":
             await guild.get_channel(channel_id).send(
                 f"{member.nick} closed this thread via reaction, deletion in 10 secs.")
-
-
             try:
                 await self.channels.get(channel_id).close(closer=member, after=10)
                 self.channels.pop(channel_id)
