@@ -22,6 +22,7 @@ class ReactionClose(commands.Cog):
     @commands.Cog.listener()
     async def on_guild_channel_delete(self, channel):
         try:
+            print("Deleting5")
             self.channels.pop(channel.id)
         except:
             pass
@@ -45,10 +46,16 @@ class ReactionClose(commands.Cog):
             await guild.get_channel(channel_id).send(
                 f"{member.nick} closed this thread via reaction, deletion in 10 secs.")
             try:
+                print("Deleting")
                 await self.channels.get(channel_id).close(closer=member, after=10)
+                print("Deletin2")
+
                 self.channels.pop(channel_id)
+                print("Deletin3")
             except:
+                print("DeletingError")
                 pass
+            print("Deleting4")
 
 
 
