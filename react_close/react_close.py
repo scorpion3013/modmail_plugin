@@ -37,7 +37,7 @@ class ReactionClose(commands.Cog):
             return
 
         if emote == "🔒":
-            await self.channels.get(channel_id).close()
+            await self.channels.get(channel_id).close(closer=member, after=10)
 
 
 
