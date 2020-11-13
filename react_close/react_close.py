@@ -13,11 +13,11 @@ class ReactionClose(commands.Cog):
         self.channels[thread.channel.id] = thread
         await msg.add_reaction("🔒")
 
-    @commands.Cog.listener()
-    async def on_thread_close(self, thread, closer, silent, delete_channel, message, scheduled):
-        # Didnt worked and too lazy to figure out
-        print(closer)
-        print(message)
+    # @commands.Cog.listener()
+    # async def on_thread_close(self, thread, closer, silent, delete_channel, message, scheduled):
+    #     # Didnt worked and too lazy to figure out
+    #     print(closer)
+    #     print(message)
 
     @commands.Cog.listener()
     async def on_guild_channel_delete(self, channel):
