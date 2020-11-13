@@ -1,10 +1,12 @@
 from discord.ext import commands
 import discord
 
+
 class ReactionClose(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.channels = {}
+
     @commands.Cog.listener()
     async def on_thread_ready(self, thread):
         msg = thread.genesis_message
@@ -12,9 +14,8 @@ class ReactionClose(commands.Cog):
         await msg.add_reaction("🔒")
 
     @commands.Cog.listener()
-    async def on_thread_close(self, thread, closer, silent, delete_channel, message, scheduled):
+    async def on_thread_close(self, closer, silent, delete_channel, message, scheduled):
         print("close event")
-        print(thread)
         print(closer)
         print(message)
 
@@ -34,9 +35,9 @@ class ReactionClose(commands.Cog):
             return
 
         if emote == "🔒":
-            await guild.get_channel(channel_id).send(f"{member.nick} closed this thread via reaction, deletion in 10 secs.")
+            await guild.get_channel(channel_id).send(
+                f"{member.nick} closed this thread via reaction, deletion in 10 secs.")
             await self.channels.get(channel_id).close(closer=member, after=10)
-
 
 
 def setup(bot):
