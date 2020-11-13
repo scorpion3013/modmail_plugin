@@ -8,14 +8,12 @@ class ReactionClose(commands.Cog):
     @commands.Cog.listener()
     async def on_thread_ready(self, thread):
         msg = thread.genesis_message
-        print(msg)
-        print(thread)
-        print(thread.channel.id)
         self.channels[thread.channel.id] = thread
         await msg.add_reaction("🔒")
 
     @commands.Cog.listener()
     async def on_thread_close(self, thread, closer, silent, delete_channel, message, scheduled):
+        print("close event")
         print(thread)
         print(closer)
         print(message)
@@ -26,7 +24,6 @@ class ReactionClose(commands.Cog):
             return
         channel_id = payload.channel_id
         if not self.channels.keys().__contains__(channel_id):
-            print("Not supported channel")
             return
         emote = payload.emoji.name if payload.emoji.id is None else str(payload.emoji.id)
 
@@ -37,6 +34,7 @@ class ReactionClose(commands.Cog):
             return
 
         if emote == "🔒":
+            await guild.get_channel(channel_id).send(f"{member.nick} closed this thread via reaction, deletion in 10 secs.")
             await self.channels.get(channel_id).close(closer=member, after=10)
 
 
