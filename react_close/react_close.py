@@ -15,7 +15,7 @@ class ReactionClose(commands.Cog):
 
     @commands.Cog.listener()
     async def on_thread_close(self, thread, closer, silent, delete_channel, message, scheduled):
-        print("close event")
+        print("close event Does not get triggert for some reason")
         print(closer)
         print(message)
 
