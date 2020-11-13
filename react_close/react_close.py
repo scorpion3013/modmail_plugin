@@ -1,7 +1,10 @@
 from discord.ext import commands
 import discord
 
-
+""""
+Made for the usage on the CCBlueX Community discord (our modmail setup).
+Might not work on some modmail configurations.
+"""
 class ReactionClose(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
