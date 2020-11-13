@@ -37,11 +37,13 @@ class ReactionClose(commands.Cog):
         if emote == "🔒":
             await guild.get_channel(channel_id).send(
                 f"{member.nick} closed this thread via reaction, deletion in 10 secs.")
+
+
             try:
+                await self.channels.get(channel_id).close(closer=member, after=10)
                 self.channels.pop(channel_id)
-            except KeyError:
+            except:
                 pass
-            await self.channels.get(channel_id).close(closer=member, after=10)
 
 
 
